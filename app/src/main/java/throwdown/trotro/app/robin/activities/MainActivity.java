@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
@@ -14,6 +16,7 @@ import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
@@ -22,6 +25,8 @@ import throwdown.trotro.app.robin.util.ApiCalls;
 
 public class MainActivity extends AppCompatActivity {
 
+    @Bind(R.id.logo)
+    ImageView logo;
 
     @OnClick(R.id.editText)
     void placeSearch() {
@@ -44,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        Glide.with(this).load(R.drawable.logo).into(logo);
+
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
@@ -74,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .subscribe(stops -> {
                             Intent intent = new Intent(MainActivity.this, DirectionActivity.class);
-                            intent.putExtra("stop_id", stops.get(0).getStopId());
+                            intent.putExtra("stop_id", stops.get(0));
                             intent.putExtra("place", place.getName());
                             startActivity(intent);
                             Toast.makeText(MainActivity.this, stops.get(0).getStopName(), Toast.LENGTH_SHORT).show();

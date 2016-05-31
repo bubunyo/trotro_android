@@ -2,10 +2,12 @@ package throwdown.trotro.app.robin.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by bubu on 5/27/16.
  */
-public class Stop {
+public class Stop implements Serializable {
     @SerializedName("id")
     private Integer id;
     @SerializedName("stop_id")

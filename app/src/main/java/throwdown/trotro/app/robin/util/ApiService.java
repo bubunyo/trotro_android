@@ -15,7 +15,7 @@ import throwdown.trotro.app.robin.data.model.Stop;
  */
 public interface ApiService {
 
-    String PRODUCTION_ENDPOINT = "http://ef1986b6.ngrok.io";
+    String PRODUCTION_ENDPOINT = "http://4064e177.ngrok.io/";
 
     @GET("stops/search/{search}")
     Observable<List<Stop>> searchStop(
